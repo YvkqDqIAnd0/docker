@@ -26,8 +26,8 @@ RUN /var/lib/dpkg/info/ca-certificates-java.postinst configure
 
 # Add Tini
 ENV TINI_VERSION v0.9.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
-RUN chmod +x /tini
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
+RUN chmod +x /bin/tini
 
 # SET Jenkins Environment Variables
 ENV JENKINS_HOME /var/jenkins_home
@@ -67,7 +67,6 @@ RUN mkdir /var/log/jenkins
 RUN mkdir /var/cache/jenkins
 RUN chown -R  jenkins:jenkins /var/log/jenkins
 RUN chown -R  jenkins:jenkins /var/cache/jenkins
-USER jenkins
 
 # Expose Ports for web and slave agents
 EXPOSE 8080

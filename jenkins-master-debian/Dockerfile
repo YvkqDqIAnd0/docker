@@ -1,13 +1,13 @@
 FROM debian:jessie
-#FROM jenkins:1.651.1
-MAINTAINER DaiAndo
+
+MAINTAINER Dai Ando
 
 RUN echo 'deb http://httpredir.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
 
 # Default to UTF-8 file.encoding
 ENV LANG C.UTF-8
 ENV JAVA_VERSION 8u91
-ENV JAVA_DEBIAN_VERSION 8u91-b14-1~bpo8+1 
+ENV JAVA_DEBIAN_VERSION 8u91-b14-1~bpo8+1
 ENV CA_CERTIFICATES_JAVA_VERSION 20140324
 
 RUN apt-get update \
@@ -33,7 +33,7 @@ RUN chmod +x /bin/tini
 ENV JENKINS_HOME /var/jenkins_home
 ENV JENKINS_SLAVE_AGENT_PORT 50000
 #ENV JENKINS_VERSION 1.651.2
-#ENV JENKINS_SHA 395fe6975cf75d93d9fafdafe96d9aab1996233b 
+#ENV JENKINS_SHA 395fe6975cf75d93d9fafdafe96d9aab1996233b
 ARG JENKINS_VERSION
 ENV JENKINS_VERSION ${JENKINS_VERSION:-1.651.2}
 ARG JENKINS_SHA
@@ -84,4 +84,3 @@ USER jenkins
 
 # Tini as the entry point to manage zombie processes
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
-
